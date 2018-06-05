@@ -25,7 +25,7 @@
       </ul>
     </div>
     <div class="list-fixed" ref="fixed" v-show="fixedTitle">
-      <div class="fixed-title">{{fixedTitle}} </div>
+      <div class="fixed-title">{{fixedTitle}} 11</div>
     </div>
     <div v-show="!data.length" class="loading-container">
       <loading></loading>
