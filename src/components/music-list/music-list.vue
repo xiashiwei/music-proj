@@ -27,6 +27,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable */
   import Scroll from 'base/scroll/scroll'
   import Loading from 'base/loading/loading'
   import SongList from 'base/song-list/song-list'

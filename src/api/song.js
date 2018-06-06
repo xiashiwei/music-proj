@@ -1,6 +1,6 @@
 import {commonParams} from './config'
 import axios from 'axios'
-
+/* eslint-disable */
 export function getLyric(mid) {
   const url = '/api/lyric'
 

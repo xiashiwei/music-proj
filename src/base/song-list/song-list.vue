@@ -1,7 +1,7 @@
 <template>
   <div class="song-list">
     <ul>
-      <li @click="selectItem(song, index)" class="item" v-for="(song, index) in songs">
+      <li @click="selectItem(song, index)" class="item" v-for="(song, index) in songs" :key="index">
         <div class="rank" v-show="rank">
           <span :class="getRankCls(index)" v-text="getRankText(index)"></span>
         </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable */
   export default {
     props: {
       songs: {
