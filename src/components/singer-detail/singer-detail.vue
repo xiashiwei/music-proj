@@ -6,7 +6,41 @@
 
 <script type="text/ecmascript-6">
 /* eslint-disable */
+import {mapGetters} from 'vuex'
+import {getSingerDetail} from 'api/singer'
+import {ERR_OK} from 'api/config'
+import {createSong} from 'common/js/song'
 
+export default {
+  computed: {
+    ...mapGetters([
+      'singer'
+    ])
+  },
+  created() {
+    this._getDetail()
+  },
+  methods: {
+    _getDetail () {
+      getSingerDetail(this.singer.id).then((res) => {
+        if(res.code === ERR_OK){
+          this.songs=this._normalizeSong(res.data.list)
+          console.log(this.songs)
+        }
+      })
+    },
+    _normalizeSong(list) {
+      let ret =[]
+      list.forEach((element) => {
+        let {musicData} =element
+        if(musicData.songid && musicData.albummid){
+          ret.push(createSong(musicData))
+        }
+      })
+      return ret
+    }
+  }
+}
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
