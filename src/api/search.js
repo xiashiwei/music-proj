@@ -1,6 +1,8 @@
 import jsonp from 'common/js/jsonp'
 import {commonParams, options} from './config'
 
+/* eslint-disable*/
+
 export function getHotKey() {
   const url = 'https://c.y.qq.com/splcloud/fcgi-bin/gethotkey.fcg'
 

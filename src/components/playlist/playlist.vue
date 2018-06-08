@@ -41,6 +41,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable*/
   import {mapActions} from 'vuex'
   import {playMode} from 'common/js/config'
   import Scroll from 'base/scroll/scroll'

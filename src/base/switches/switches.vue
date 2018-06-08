@@ -1,13 +1,14 @@
 <template>
   <ul class="switches">
     <li class="switch-item" v-for="(item,index) in switches" :class="{'active':currentIndex === index}"
-        @click="switchItem(index)">
+        @click="switchItem(index)" :key="index">
       <span>{{item.name}} </span>
     </li>
   </ul>
 </template>
 /*eslint-disable*/
 <script type="text/ecmascript-6">
+/* eslint-disable*/
 export default {
     props: {
       switches: {

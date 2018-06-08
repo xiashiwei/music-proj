@@ -38,7 +38,7 @@
                 <p ref="lyricLine"
                    class="text"
                    :class="{'current': currentLineNum ===index}"
-                   v-for="(line,index) in currentLyric.lines">{{line.txt}}</p>
+                   v-for="(line,index) in currentLyric.lines" :key="index">{{line.txt}}</p>
               </div>
             </div>
           </scroll>
@@ -101,6 +101,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable*/
   import {mapGetters, mapMutations, mapActions} from 'vuex'
   import animations from 'create-keyframe-animation'
   import {prefixStyle} from 'common/js/dom'

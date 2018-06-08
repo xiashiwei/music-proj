@@ -7,6 +7,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable*/
   import {debounce} from 'common/js/util'
 
   export default {

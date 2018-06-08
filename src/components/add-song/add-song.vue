@@ -41,6 +41,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable*/
   import SearchBox from 'base/search-box/search-box'
   import SongList from 'base/song-list/song-list'
   import SearchList from 'base/search-list/search-list'

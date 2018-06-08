@@ -10,6 +10,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable*/
   export default {
     props: {
       radius: {
