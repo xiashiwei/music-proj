@@ -12,6 +12,10 @@ Vue.config.productionTip = false
 Vue.use(VueLazyload, {
   loading: require('common/image/default.png')
 })
+
+
+
+
 new Vue({
   el: '#app',
   store,

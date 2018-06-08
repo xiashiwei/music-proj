@@ -202,7 +202,7 @@ export default {
     .list-shortcut
       position: absolute
       z-index: 30
-      right: 50px
+      right: 0
       top: 50%
       transform: translateY(-50%)
       width: 20px

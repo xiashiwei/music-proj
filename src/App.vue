@@ -22,13 +22,6 @@ export default {
 
 </script>
 
-<style scoped lang="stylus">
-@import 'common/stylus/variable'
-
-body,html
-  margin:0
-  padding:0
-#app
-  color:$color-theme
-  background-color:#222
+<style lang="stylus">
+@import 'common/stylus/index'
 </style>
