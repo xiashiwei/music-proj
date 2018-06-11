@@ -27,6 +27,11 @@ const Search = (resolve) => {
     resolve(module)
   })
 }
+const Disc = (resolve) => {
+  import('components/disc/disc').then((module) => {
+    resolve(module)
+  })
+}
 export default new Router({
   routes: [
     {
@@ -35,8 +40,13 @@ export default new Router({
     },
     {
       path: '/recommend',
-      name: 'Recommend',
-      component: Recommend
+      component: Recommend,
+      children: [
+        {
+          path: ':id',
+          component: Disc
+        }
+      ]
     },
     {
       path: '/singer',
