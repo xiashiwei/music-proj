@@ -26,7 +26,7 @@
         </ul>
       </div>
     </div>
-    <div class="loading-container" v-show="!discList.length">
+    <div class="loading-container" v-show="discList.length">
       <loading></loading>
     </div>
     </scroll>
@@ -38,14 +38,14 @@
 import Loading from 'base/loading/loading'
 import Slider from 'base/slider/slider'
 import Scroll from 'base/scroll/scroll'
-import {getRecommend, getDiscList} from 'api/recommend'
+import {getRecommend} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import {mapMutations} from 'vuex'
 
 export default {
   created () {
     this._getRecommend()
-    this._getDiscList()
+    //  this._getDiscList()
   },
   methods: {
     selectItem (item) {
@@ -62,12 +62,7 @@ export default {
       })
     },
     _getDiscList () {
-      getDiscList().then((res) => {
-        if (res.code === ERR_OK) {
-          this.discList = res.recomPlaylist.data.v_hot
-          console.log(this.discList)
-        }
-      })
+
     },
     loadImage () {
       if (!this.checkloaded) {

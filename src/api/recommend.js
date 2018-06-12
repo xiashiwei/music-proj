@@ -1,7 +1,7 @@
 import jsonp from 'common/js/jsonp'
 import {commonParams, options} from './config'
 import axios from 'axios'
-
+/*eslint-disable*/
 export function getRecommend () {
   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
@@ -15,18 +15,32 @@ export function getRecommend () {
 }
 
 export function getDiscList () {
-  const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
-
+  const url = 'http://bird.ioliu.cn/v2/?url=http://ustbhuangyi.com/music/api/getDiscList'
+  
   const data = Object.assign({}, commonParams, {
-    g_tk: 5381,
+    g_tk: 1928093487,
     loginUin: 0,
     hostUin: 0,
     platform: 'yqq',
     needNewCode: 0,
-    data: '{"recomPlaylist":{"method":"get_hot_recommend","param":{"async":1,"cmd":2},"module":"playlist.HotRecommendServer"}}'
+    format: 'json',
+    sin: 0,
+    ein: 29,
+    sortId: 5,
+    categoryId: 10000000,
+    rnd: Math.random()
   })
 
-  return jsonp(url, data, {})
+  return axios.get('http://ustbhuangyi.com/music/api/getDiscList?g_tk=1928093487&inCharset=utf-8&outCharset=utf-8&notice=0&format=json&platform=yqq&hostUin=0&sin=0&ein=29&sortId=5&needNewCode=0&categoryId=10000000&rnd=0.4811605500332896', {
+    params: {
+      headers: {
+        host: "ustbhuangyi.com",
+        referer: "http://ustbhuangyi.com/music/"
+      }
+    }
+  }).then((res) => {console.log(res)
+    return Promise.resolve(res.data)
+  })
 }
 
 export function getSongList (disstid) {
@@ -45,13 +59,11 @@ export function getSongList (disstid) {
       referer: "https://c.y.qq.com/",
       host: "c.y.qq.com"
     }`,
+    contentType: 'application/x-www-form-urlencoded',
+    cacheControl: 'no-cache',
     g_tk: 5381,
     loginUin: 0
   })
 
-  return axios.get(url, {
-    params: data
-  }).then((res) => {
-    return Promise.resolve(res.data)
-  })
+  return jsonp(url, data, options)
 }
