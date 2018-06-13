@@ -22,6 +22,12 @@ const Rank = (resolve) => {
     resolve(module)
   })
 }
+const TopList = (resolve) => {
+  import('components/top-list/top-list').then((module) => {
+    resolve(module)
+  })
+}
+
 const Search = (resolve) => {
   import('components/search/search').then((module) => {
     resolve(module)
@@ -60,13 +66,23 @@ export default new Router({
     },
     {
       path: '/rank',
-      name: 'Rank',
-      component: Rank
+      component: Rank,
+      children: [
+        {
+          path: ':id',
+          component: TopList
+        }
+      ]
     },
     {
       path: '/search',
-      name: 'Search',
-      component: Search
+      component: Search,
+      children: [
+        {
+          path: ':id',
+          component: SingerDetail
+        }
+      ]
     }
   ]
 })

@@ -5,6 +5,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/*eslint-disable*/
   import MusicList from 'components/music-list/music-list'
   import {getMusicList} from 'api/rank'
   import {ERR_OK} from 'api/config'
