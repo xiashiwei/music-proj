@@ -15,11 +15,11 @@
                 @click="selectItem(item,index)">
               <i class="current" :class="getCurrentIcon(item)"></i>
               <span class="text">{{item.name}}</span>
-              <span @click.stop="toggleFavorite(item)" class="like">
-                <i :class="getFavoriteIcon(item)"></i>
+              <span @click.stop="toggleFavorite(item,index)" class="like">
+                <i :class="{'icon-like': getFavoriteIcon(item) , 'icon-not-like': !getFavoriteIcon(item)}"></i>
               </span>
               <span @click.stop="deleteOne(item)" class="delete">
-                <i class="icon-delete"></i>
+                <i class="icon-close"></i>
               </span>
             </li>
           </transition-group>
@@ -48,13 +48,16 @@
   import Confirm from 'base/confirm/confirm'
   import AddSong from 'components/add-song/add-song'
   import {playerMixin} from 'common/js/mixin'
+  import {loadFavorite} from 'common/js/cache'
+  import { addClass,removeClass } from 'common/js/dom'
 
   export default {
     mixins: [playerMixin],
     data() {
       return {
         showFlag: false,
-        refreshDelay: 120
+        refreshDelay: 120,
+        children: []
       }
     },
     computed: {
@@ -110,9 +113,41 @@
       addSong() {
         this.$refs.addSong.show()
       },
+      toggleFavorite(currentSong,index){
+        let songs=loadFavorite()
+        let flag=false;
+
+        songs.map((item)=>{
+          if(item.id==currentSong.id){
+            flag=true
+          }
+        })
+        if(flag){
+          this.deleteFavoriteList(currentSong)
+        }else{
+          this.saveFavoriteList(currentSong)
+        }  
+        
+        this.children = this.$refs.list.$el.children[index].children[2].children[0]
+        removeClass(this.children, flag?'icon-like':'icon-not-like')
+        addClass(this.children, flag?'icon-not-like':'icon-like')
+        
+      },
+      getFavoriteIcon(currentSong){
+        let songs=loadFavorite()
+        let flag=false;
+        songs.map((item)=>{
+          if(item.id == currentSong.id){
+            flag=true;
+          }
+        })
+        return flag;
+      },
       ...mapActions([
         'deleteSong',
-        'deleteSongList'
+        'deleteSongList',
+        'saveFavoriteList',
+        'deleteFavoriteList'
       ])
     },
     watch: {

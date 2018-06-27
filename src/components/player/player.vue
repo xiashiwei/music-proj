@@ -112,6 +112,7 @@
   import Scroll from 'base/scroll/scroll'
   import {playerMixin} from 'common/js/mixin'
   import Playlist from 'components/playlist/playlist'
+  import {loadFavorite} from 'common/js/cache'
 
   const transform = prefixStyle('transform')
   const transitionDuration = prefixStyle('transitionDuration')
@@ -401,11 +402,37 @@
           scale
         }
       },
+      toggleFavorite(currentSong){
+        let songs=loadFavorite()
+        let flag=false;
+        songs.map((item)=>{
+          if(item.id==currentSong.id){
+            flag=true
+          }
+        })
+        if(flag){
+          this.deleteFavoriteList(currentSong)
+        }else{
+          this.saveFavoriteList(currentSong)
+        }           
+      },
+      getFavoriteIcon(currentSong){
+        let songs=loadFavorite()
+        let flag='icon-not-like';
+        songs.map((item)=>{
+          if(item.id == currentSong.id){
+            flag='icon-like';
+          }
+        })
+        return flag;
+      },
       ...mapMutations({
         setFullScreen: 'SET_FULL_SCREEN'
       }),
       ...mapActions([
-        'savePlayHistory'
+        'savePlayHistory',
+        'saveFavoriteList',
+        'deleteFavoriteList'
       ])
     },
     watch: {
