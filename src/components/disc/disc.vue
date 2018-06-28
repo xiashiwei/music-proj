@@ -34,12 +34,12 @@
     },
     methods: {
       _getSongList() {
-        if (!this.disc.content_id) {
+        if (!this.disc.dissid) {
           this.$router.push('/recommend')
           return
         }
-        getSongList(this.disc.content_id).then((res) => {console.log(res)
-          if (res.code === ERR_OK) {return
+        getSongList(this.disc.dissid).then((res) => {
+          if (res.code === ERR_OK) {
             this.songs = this._normalizeSongs(res.cdlist[0].songlist)
           }
         })

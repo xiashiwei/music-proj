@@ -38,8 +38,8 @@ export function getDiscList () {
   })
 }
 
-export function getSongList (disstid) {
-  const url = 'https://bird.ioliu.cn/v2/?url=https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg?'
+export function getSongList(disstid) {
+  const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
 
   const data = Object.assign({}, commonParams, {
     disstid,
@@ -49,15 +49,7 @@ export function getSongList (disstid) {
     onlysong: 0,
     platform: 'yqq',
     hostUin: 0,
-    needNewCode: 0,
-    headers: `{
-      referer: "https://c.y.qq.com/",
-      host: "c.y.qq.com"
-    }`,
-    contentType: 'application/x-www-form-urlencoded',
-    cacheControl: 'no-cache',
-    g_tk: 5381,
-    loginUin: 0
+    needNewCode: 0
   })
 
   return jsonp(url, data, options)

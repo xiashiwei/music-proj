@@ -35,6 +35,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+/* eslint-disable */
 import Loading from 'base/loading/loading'
 import Slider from 'base/slider/slider'
 import Scroll from 'base/scroll/scroll'
@@ -57,10 +58,10 @@ export default {
       this.$refs.scroll.refresh()
     },
     selectItem (item) {
+      this.setDisc(item)
       this.$router.push({
         path: `/recommend/${item.dissid}`
       })
-      this.setDisc(item)
     },
     _getRecommend () {
       getRecommend().then((res) => {
