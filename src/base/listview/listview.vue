@@ -16,8 +16,7 @@
         </uL>
       </li>
     </ul>
-    <div class="list-shortcut" @touchstart.stop.prevent="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove"
-         @touchend.stop>
+    <div class="list-shortcut" @touchstart="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove">
       <ul>
         <li v-for="(item, index) in shortcutList" :data-index="index" class="item"
             :class="{'current':currentIndex===index}" :key="index">{{item}}
@@ -81,12 +80,13 @@ export default {
       },
       onShortcutTouchStart(e) {
         let anchorIndex = getData(e.target, 'index')
-        //let firstTouch = e.touches[0]
-        //this.touch.y1 = firstTouch.pageY
-        //this.touch.anchorIndex = anchorIndex
+        let firstTouch = e.touches[0]
+        this.touch.y1 = firstTouch.pageY
+        this.touch.anchorIndex = anchorIndex
 
-        //this._scrollTo(anchorIndex)
-        this.$refs.listview.scrollToElement(this.$refs.listGroup[anchorIndex],0)
+        this._scrollTo(anchorIndex)
+
+        //this.$refs.listview.scrollToElement(this.$refs.listGroup[anchorIndex],0)
       },
       onShortcutTouchMove(e) {
         let firstTouch = e.touches[0]
@@ -114,6 +114,17 @@ export default {
         }
       },
       _scrollTo(index) {
+        // if (!index && index !== 0) {
+        //   return
+        // }
+        // if (index < 0) {
+        //   index = 0
+        // } else if (index > this.listHeight.length - 2) {
+        //   index = this.listHeight.length - 2
+        // }
+        // this.scrollY = -this.listHeight[index]
+        // this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
+
         if (!index && index !== 0) {
           return
         }
@@ -122,8 +133,8 @@ export default {
         } else if (index > this.listHeight.length - 2) {
           index = this.listHeight.length - 2
         }
-        this.scrollY = -this.listHeight[index]
-        this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
+        this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 100)
+        this.scrollY = this.$refs.listview.scroll.y
       }
     },
     watch: {

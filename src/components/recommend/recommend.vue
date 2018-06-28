@@ -14,20 +14,20 @@
       <div class="recommend-list">
         <h1 class="list-title">热门歌单推荐</h1>
         <ul>
-          <li v-for="(item,index) in discList" :key="index" class="item" @click="selectItem(item)">
-            <div class="icon">
-              <img width="60" height="60" v-lazy="item.cover">
-            </div>
-            <div class="text">
-              <h2 class="name" v-html="item.title"></h2>
-              <p class="desc" v-html="item.username"></p>
-            </div>
-          </li>
+          <li @click="selectItem(item)" v-for="(item,index) in discList" class="item" :key="index">
+              <div class="icon">
+                <img width="60" height="60" v-lazy="item.imgurl">
+              </div>
+              <div class="text">
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
+              </div>
+            </li>
         </ul>
       </div>
     </div>
-    <div class="loading-container" v-show="discList.length">
-      <loading></loading>
+    <div class="loading-container" v-show="!discList.length">
+        <loading></loading>
     </div>
     </scroll>
     <router-view></router-view>
@@ -38,19 +38,27 @@
 import Loading from 'base/loading/loading'
 import Slider from 'base/slider/slider'
 import Scroll from 'base/scroll/scroll'
-import {getRecommend} from 'api/recommend'
+import {playlistMixin} from 'common/js/mixin'
+import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import {mapMutations} from 'vuex'
 
 export default {
+  mixins: [playlistMixin],
   created () {
     this._getRecommend()
-    //  this._getDiscList()
+    this._getDiscList()
   },
   methods: {
+    handlePlaylist (playlist) {
+      const bottom = playlist.length > 0 ? '60px' : ''
+
+      this.$refs.recommend.style.bottom = bottom
+      this.$refs.scroll.refresh()
+    },
     selectItem (item) {
       this.$router.push({
-        path: `/recommend/${item.content_id}`
+        path: `/recommend/${item.dissid}`
       })
       this.setDisc(item)
     },
@@ -62,7 +70,11 @@ export default {
       })
     },
     _getDiscList () {
-
+      getDiscList().then((res) => {
+        if (res.code === ERR_OK) {
+          this.discList = res.data.list
+        }
+      })
     },
     loadImage () {
       if (!this.checkloaded) {

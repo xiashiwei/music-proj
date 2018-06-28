@@ -15,8 +15,8 @@ export function getRecommend () {
 }
 
 export function getDiscList () {
-  const url = 'http://bird.ioliu.cn/v2/?url=http://ustbhuangyi.com/music/api/getDiscList'
-  
+  const url = '/api/getDiscList'
+
   const data = Object.assign({}, commonParams, {
     g_tk: 1928093487,
     loginUin: 0,
@@ -31,14 +31,9 @@ export function getDiscList () {
     rnd: Math.random()
   })
 
-  return axios.get('http://ustbhuangyi.com/music/api/getDiscList?g_tk=1928093487&inCharset=utf-8&outCharset=utf-8&notice=0&format=json&platform=yqq&hostUin=0&sin=0&ein=29&sortId=5&needNewCode=0&categoryId=10000000&rnd=0.4811605500332896', {
-    params: {
-      headers: {
-        host: "ustbhuangyi.com",
-        referer: "http://ustbhuangyi.com/music/"
-      }
-    }
-  }).then((res) => {console.log(res)
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
     return Promise.resolve(res.data)
   })
 }
