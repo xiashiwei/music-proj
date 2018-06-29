@@ -58,10 +58,11 @@ export default {
       this.$refs.scroll.refresh()
     },
     selectItem (item) {
-      this.setDisc(item)
+      
       this.$router.push({
         path: `/recommend/${item.dissid}`
       })
+      this.setDisc(item)
     },
     _getRecommend () {
       getRecommend().then((res) => {
