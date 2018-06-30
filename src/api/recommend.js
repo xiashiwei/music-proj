@@ -15,7 +15,7 @@ export function getRecommend () {
 }
 
 export function getDiscList () {
-  const url = '/api/getDiscList'
+  const url = 'https://bird.ioliu.cn/v1?url=http://ustbhuangyi.com/music/api/getDiscList'
 
   const data = Object.assign({}, commonParams, {
     g_tk: 1928093487,
@@ -39,7 +39,7 @@ export function getDiscList () {
 }
 
 export function getSongList(disstid) {
-  const url = '/api/getCdInfo'
+  const url = 'https://bird.ioliu.cn/v1?url=http://ustbhuangyi.com/music/api/getCdInfo'
 
   const data = Object.assign({}, commonParams, {
     g_tk: 1928093487,

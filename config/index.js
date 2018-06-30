@@ -59,7 +59,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'https://xiashiwei.github.io/music-proj/',
+    assetsPublicPath: 'https://xiashiwei.github.io/music-proj/dist/',
 
     /**
      * Source Maps
