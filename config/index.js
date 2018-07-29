@@ -9,7 +9,7 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: '',
-    assetsPublicPath: './',
+    assetsPublicPath: '/',
     proxyTable: {
         '/api': {
             target: 'http://ustbhuangyi.com/music/api', // 接口的域名

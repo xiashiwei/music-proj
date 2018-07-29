@@ -44,13 +44,14 @@
   import {getHotKey} from 'api/search'
   import {ERR_OK} from 'api/config'
   import {playlistMixin, searchMixin} from 'common/js/mixin'
-  import {mapActions} from 'vuex'
+  import {mapActions,mapGetters} from 'vuex'
 
   export default {
     mixins: [playlistMixin, searchMixin],
     data() {
       return {
-        hotKey: []
+        hotKey: [],
+        query:''
       }
     },
     computed: {
@@ -71,6 +72,18 @@
         this.$refs.shortcutWrapper.style.bottom = bottom
         this.$refs.shortcut.refresh()
       },
+      addQuery(query){
+        this.$refs.searchBox.setQuery(query);
+      },
+      onQueryChange(query){
+        this.query=query
+      },
+      blurInput(){
+        this.$refs.searchBox.blur();
+      },
+      saveSearch(){
+        this.saveSearchHistory(this.query);
+      },
       showConfirm() {
         this.$refs.confirm.show()
       },
@@ -81,8 +94,13 @@
           }
         })
       },
+      ...mapGetters([
+        'searchHistory'
+      ]),
       ...mapActions([
-        'clearSearchHistory'
+        'clearSearchHistory',
+        'saveSearchHistory',
+        'deleteSearchHistory'
       ])
     },
     watch: {
