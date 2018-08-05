@@ -21,7 +21,7 @@ export function search(query, page, zhida, perpage) {
   const url = 'https://bird.ioliu.cn/v1?url=http://ustbhuangyi.com/music/api/search'
 
   const data = Object.assign({}, commonParams, {
-    w: encodeURI(query),
+    w: query,
     p: page,
     perpage,
     n: perpage,
